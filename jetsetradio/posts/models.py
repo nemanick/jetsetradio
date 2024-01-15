@@ -72,3 +72,13 @@ class Like(models.Model):
                 name='userliketrack_unique'
             )
         ]
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE,)
+    track = models.ForeignKey(Track, on_delete=models.CASCADE,)
+    text = models.TextField(max_length=1024,)
+    create_date = models.DateTimeField(auto_now_add=True,)
+
+    class Meta:
+        ordering = ['-create_date']
