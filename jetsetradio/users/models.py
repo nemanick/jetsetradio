@@ -15,7 +15,7 @@ class CustomUser(AbstractUser):
     username = models.CharField(max_length=256, unique=True,)
     email = models.EmailField(unique=True,)
     password = models.CharField(max_length=16,)
-    role = models.CharField(max_lenght=16, choices=ROLE_CHOICES, default=USER,)
+    role = models.CharField(max_length=16, choices=ROLE_CHOICES, default=USER,)
     veritificated = models.BooleanField(default=False,)
     bio = models.TextField(blank=True,)
 
@@ -33,8 +33,8 @@ class CustomUser(AbstractUser):
     
 
 class Follow(models.Model):
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE,)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='author')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='subscriber')
 
     class Meta:
         verbose_name = 'Подписка'
@@ -50,18 +50,16 @@ class Follow(models.Model):
 class UserOptions(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,)
     avatar = models.ImageField(upload_to='')
-    background_color = models.CharField(max_length=7, validators=[
+    background_color = models.CharField(max_length=7, null=True, blank=True, validators=[
         RegexValidator(
             regex='^[0-9a-fA-F]+$',
             message='Введите допустимый hex-код',
             code='invalid_hex_code',
         )
     ])
-    text_color = background_color = models.CharField(max_length=7, validators=[
-        RegexValidator(
-            regex='^[0-9a-fA-F]+$',
-            message='Введите допустимый hex-код',
-            code='invalid_hex_code',
-        )
-    ])
-
+    text_color = models.CharField(max_length=7, null=True, blank=True, 
+                                                     validators=[
+                                                        RegexValidator(
+                                                            regex='^[0-9a-fA-F]+$',
+                                                            message='Введите допустимый hex-код',
+                                                            code='invalid_hex_code',)])
