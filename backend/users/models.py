@@ -52,19 +52,3 @@ class Subscribe(models.Model):
         if self.user == self.author:
             raise ValidationError('Нельзя оформить подписку на самого себя')
 
-
-class UserOptions(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,)
-    avatar = models.ImageField(upload_to='')
-    background_color = models.CharField(max_length=7, null=True, blank=True,
-                                        validators=[RegexValidator(
-                                            regex='^[0-9a-fA-F]+$',
-                                            message=('Введите допустимый '
-                                                     'hex-код'),
-                                            code='invalid_hex_code',)])
-    text_color = models.CharField(max_length=7, null=True, blank=True,
-                                  validators=[
-                                      RegexValidator(
-                                          regex='^[0-9a-fA-F]+$',
-                                          message='Введите допустимый hex-код',
-                                          code='invalid_hex_code',)])

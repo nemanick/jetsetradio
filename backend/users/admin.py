@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser, Subscribe, UserOptions
+from .models import CustomUser, Subscribe
 
 
 class CustomUserAdmin(admin.ModelAdmin):
@@ -10,4 +10,3 @@ class CustomUserAdmin(admin.ModelAdmin):
 
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Subscribe)
-admin.site.register(UserOptions)

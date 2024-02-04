@@ -1,0 +1,49 @@
+{% load static %}
+    <nav>
+      <div class="logo">
+        <a href="#" id="homepage_ico_button">
+          <img src="./img/logo.png" width="40" height="40">
+        </a>
+        <p>
+          JetSetRadio
+        </p>
+      </div>
+      <ul class="nav_itens_container">
+        <li class="nav_item">
+          <a id="homepage_nav_button" href="#">
+            Homepage
+          </a>
+        </li>
+        <li class="nav_item">
+          <a href="#">
+            Likes
+          </a>
+        </li>
+        <li class="nav_item">
+          <a href="#">
+            Following
+          </a>
+        </li>
+        <li class="nav_item">
+          <a href="#">
+            For Artist
+          </a>
+        </li>
+        <li class="nav_item">
+          <a href="#">
+            Upload
+          </a>
+        </li>
+        <div class="dropdown">
+          <a class="dropdown-link" href="#" onclick="toggleDropdown()">My profile</a>
+          <div class="dropdown-content" id="myDropdown">
+              <a href="#" id="first">My page</a>
+              <a href="#">Sign out</a>
+          </div>
+        </div>
+        <form method="get" action="{% url 'search' %}">
+          <input type="text" name="search-text">
+          <button id="search_button" type="submit">Search</button>
+        </form>
+      </ul>
+    </nav>
