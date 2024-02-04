@@ -49,12 +49,11 @@ class Track(models.Model):
 
 
 class Like(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE,
-                             related_name='likes')
-    track = models.ForeignKey(Track, on_delete=models.CASCADE,
-                              related_name='likes')
+    user = models.ForeignKey(User, on_delete=models.CASCADE,)
+    track = models.ForeignKey(Track, on_delete=models.CASCADE,)
 
     class Meta:
+        default_related_name = 'like'
         constraints = [
             models.UniqueConstraint(
                 fields=['user', 'track'],
