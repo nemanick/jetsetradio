@@ -1,57 +1,3 @@
-/*----------------------------------------
-[Master Stylesheet]
-
-Project:	Volna HTML Template
-Version:	1.0
-Primary use:	Volna HTML Template
-----------------------------------------*/
-/*----------------------------------------
-[Table of contents]
-
-1. Fonts
-2. Common styles
-3. Header
-4. Sidebar
-5. Player
-6. Main
-7. Breadcrumb
-8. Profile
-9. Hero
-10. Album
-11. Releases
-12. Store-item
-13. Artist
-14. Event
-15. Single
-16. Post
-17. Live
-18. Product
-19. Partners
-20. Stats
-21. Dashbox
-22. Feature
-23. Step
-24. Plan
-25. Contacts
-26. Cart
-27. Article
-28. Share
-29. Comments
-30. Footer
-31. Sign
-32. Page 404
-33. Modal
-34. Slider radio
-35. Select2
-36. Scrollbar-track
-----------------------------------------*/
-/*==============================
-	Fonts
-==============================*/
-@import url("../../../../external.html?link=https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;family=Inter:wght@400;500&amp;display=swap");
-/*==============================
-	Common styles
-==============================*/
 html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -237,9 +183,7 @@ body::-webkit-scrollbar-thumb {
 .owl-carousel .owl-item {
   -webkit-transform: none;
 }
-/*==============================
-	Header
-==============================*/
+
 .header {
   display: block;
   position: fixed;
@@ -769,9 +713,7 @@ body::-webkit-scrollbar-thumb {
     color: #25a56a;
   }
 }
-/*==============================
-	Sidebar
-==============================*/
+
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -957,9 +899,7 @@ body::-webkit-scrollbar-thumb {
     max-height: calc(100vh - 332px);
   }
 }
-/*==============================
-	Player
-==============================*/
+
 .player {
   position: fixed;
   z-index: 102;
@@ -1115,9 +1055,7 @@ body::-webkit-scrollbar-thumb {
 .plyr--full-ui input[type="range"] {
   color: #25a56a;
 }
-/*==============================
-	Main
-==============================*/
+
 .main {
   position: relative;
   margin-top: 70px;
@@ -2005,9 +1943,7 @@ body::-webkit-scrollbar-thumb {
     display: block;
   }
 }
-/*==============================
-	Hero
-==============================*/
+
 .hero {
   display: block;
   width: 100%;
@@ -2500,9 +2436,7 @@ body::-webkit-scrollbar-thumb {
     width: 290px;
   }
 }
-/*==============================
-	Store-item
-==============================*/
+
 .store-item {
   margin-top: 20px;
   border: 1px solid #222227;
@@ -2616,9 +2550,7 @@ body::-webkit-scrollbar-thumb {
     width: 290px;
   }
 }
-/*==============================
-	Artist
-==============================*/
+
 .artist {
   display: flex;
   flex-direction: column;
@@ -2680,9 +2612,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 30px;
   }
 }
-/*==============================
-	Event
-==============================*/
+
 .event {
   display: flex;
   flex-direction: column;
@@ -2815,9 +2745,7 @@ body::-webkit-scrollbar-thumb {
     font-size: 26px;
   }
 }
-/*==============================
-	Single
-==============================*/
+
 .single-item {
   display: flex;
   flex-direction: row;
@@ -3032,9 +2960,7 @@ body::-webkit-scrollbar-thumb {
 .single-item:hover .single-item__cover.play svg:last-child {
   opacity: 1;
 }
-/*==============================
-	Post
-==============================*/
+
 .post {
   position: relative;
   margin-top: 20px;
@@ -3205,9 +3131,7 @@ body::-webkit-scrollbar-thumb {
     height: calc(100% - 30px);
   }
 }
-/*==============================
-	Live
-==============================*/
+
 .live {
   display: flex;
   flex-direction: row;
@@ -3335,9 +3259,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 30px;
   }
 }
-/*==============================
-	Product
-==============================*/
+
 .product {
   position: relative;
   margin-top: 20px;
@@ -3455,9 +3377,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 30px;
   }
 }
-/*==============================
-	Partners
-==============================*/
+
 .partners {
   margin-top: 60px;
 }
@@ -3477,9 +3397,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 70px;
   }
 }
-/*==============================
-	Stats
-==============================*/
+
 .stats {
   display: flex;
   flex-direction: column;
@@ -3622,9 +3540,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 30px;
   }
 }
-/*==============================
-	Dashbox
-==============================*/
+
 .dashbox {
   background-color: #16151a;
   margin-top: 20px;
@@ -3809,9 +3725,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 30px;
   }
 }
-/*==============================
-	Feature
-==============================*/
+
 .feature {
   display: flex;
   flex-direction: row;
@@ -3890,9 +3804,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 40px;
   }
 }
-/*==============================
-	Step
-==============================*/
+
 .step {
   display: flex;
   flex-direction: row;
@@ -3945,9 +3857,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 30px;
   }
 }
-/*==============================
-	Plan
-==============================*/
+
 .plan {
   display: block;
   margin-top: 20px;
@@ -4078,9 +3988,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 30px;
   }
 }
-/*==============================
-	Contacts
-==============================*/
+
 .contacts__list {
   margin-top: 20px;
 }
@@ -4141,9 +4049,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 10px;
   }
 }
-/*==============================
-	Cart
-==============================*/
+
 .cart {
   position: relative;
   display: flex;
@@ -4385,9 +4291,7 @@ body::-webkit-scrollbar-thumb {
     margin-left: 40px;
   }
 }
-/*==============================
-	Article
-==============================*/
+
 .article {
   display: block;
   position: relative;
@@ -4759,9 +4663,7 @@ body::-webkit-scrollbar-thumb {
     height: 460px;
   }
 }
-/*==============================
-	Share
-==============================*/
+
 .share {
   margin-top: 10px;
   display: flex;
@@ -4806,9 +4708,7 @@ body::-webkit-scrollbar-thumb {
   background-color: #25a56a;
   color: #fff;
 }
-/*==============================
-	Comments
-==============================*/
+
 .comments {
   margin-top: 50px;
   padding-top: 50px;
@@ -5081,9 +4981,7 @@ body::-webkit-scrollbar-thumb {
     margin-right: 0;
   }
 }
-/*==============================
-	Footer
-==============================*/
+
 .footer {
   background-color: #222227;
   padding: 30px 0 20px;
@@ -5257,9 +5155,7 @@ body::-webkit-scrollbar-thumb {
     width: auto;
   }
 }
-/*==============================
-	Sign
-==============================*/
+
 .sign {
   display: block;
   position: relative;
@@ -5683,9 +5579,7 @@ body::-webkit-scrollbar-thumb {
     width: 180px;
   }
 }
-/*==============================
-	Page 404
-==============================*/
+
 .page-404 {
   display: block;
   position: relative;
@@ -5762,9 +5656,7 @@ body::-webkit-scrollbar-thumb {
     padding: 30px 0 0;
   }
 }
-/*==============================
-	Modal
-==============================*/
+
 .modal {
   position: relative;
   display: block;
@@ -5939,9 +5831,7 @@ body::-webkit-scrollbar-thumb {
 .mfp-fade.mfp-wrap.mfp-removing .mfp-content {
   opacity: 0;
 }
-/*==============================
-	Slider radio
-==============================*/
+
 .slider-radio {
   display: flex;
   flex-direction: row;
@@ -5993,9 +5883,7 @@ body::-webkit-scrollbar-thumb {
     width: auto;
   }
 }
-/*==============================
-	Select2
-==============================*/
+
 .select2-container {
   width: auto !important;
   margin-right: 30px;
@@ -6080,9 +5968,7 @@ body::-webkit-scrollbar-thumb {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
 }
-/*==============================
-	Scrollbar-track
-==============================*/
+
 .scrollbar-track-y {
   background: #222227 !important;
   top: 0px !important;

@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import (AbstractBaseUser,
     BaseUserManager, PermissionsMixin)
 
-class UserManager(BaseUserManager):
+class CustomUserManager(BaseUserManager):
     '''Custom user manager'''
     def create_user(self, email, password=None, **extra_fields):
         '''Creates and saves a user using email address'''
@@ -25,14 +25,14 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     '''Custom user model that support using email instead of username'''
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
-    objects = UserManager()
+    objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
 

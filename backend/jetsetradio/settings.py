@@ -60,7 +60,7 @@ TEMPLATES = [
             ],
         
         'libraries' : {
-            'poll_extras': 'core.templatetags.poll_extras',
+            'poll_extras': 'core.managment.poll_extras',
             },
         },
     },

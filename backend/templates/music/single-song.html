@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 {% load poll_extras %}
 {% load static %}
-{% block title %} <title>{{song.title}} | NovaMusic</title>{% endblock title %}
+{% block title %} <title>{{song.title}} | JetSetRadio</title>{% endblock title %}
 {% block content %}
 
 <style>
@@ -10,11 +10,9 @@
     }
 </style>
 
-<!-- main content -->
 <main class="main">
     <div class="container-fluid">
         <div class="row row--grid">
-            <!-- breadcrumb -->
             <div class="col-12">
                 <ul class="breadcrumb">
                     <li class="breadcrumb__item"><a href="{% url 'home' %}">Home</a></li>
@@ -22,15 +20,12 @@
                     <li class="breadcrumb__item breadcrumb__item--active">{{song.title}} - {% for artist in song.artists.all %} {{artist.title}}, {% endfor %}</li>
                 </ul>
             </div>
-            <!-- end breadcrumb -->
 
-            <!-- title -->
             <div class="col-12">
                 <div class="main__title main__title--page">
                     <h1>{{song.title}} - {% for artist in song.artists.all %} {{artist.title}}, {% endfor %}</h1>
                 </div>
             </div>
-            <!-- end title -->
 
             <div class="col-12">
                 <div class="release">
@@ -57,16 +52,13 @@
 
             <div class="col-12 col-lg-8">
                 <div class="article">
-                    <!-- article content -->
                     <div class="article__content">
                         {% if song.lyrics %}
                         <h4>Lyric</h4>
                         <p>{{song.lyrics|linebreaksbr}}</p>
                         {% endif %}
                     </div>
-                    <!-- end article content -->
 
-                    <!-- comments -->
                     <div class="comments">
                         <div class="comments__title">
                             <h4>Comments</h4>
@@ -159,21 +151,17 @@
                             <p class="comments__text">Please log in to be able to leave a comment.</p>
                         {% endif %}
                     </div>
-                    <!-- end comments -->
                 </div>
             </div>
 
             <div class="col-12 col-lg-4">
                 {% if song.album %}
-                <!-- releases -->
                 <div class="row row--sidebar">
-                    <!-- title -->
                     <div class="col-12">
                         <div class="main__title main__title--sidebar">
                             <h3>Album{% if artist_albums.count > 1 %}{{'s'}}{% endif %} from this artist</h3>
                         </div>
                     </div>
-                    <!-- end title -->
                     {% for album in artist_albums %}
                     <div class="col-6 col-sm-4 col-lg-6">
                         <div class="album album--sidebar">
@@ -194,12 +182,10 @@
                     </div>
                     {% endfor %}
                 </div>
-                <!-- end releases -->
                 {% endif %}
             </div>	
         </div>
     </div>
 </main>
-<!-- end main content -->
 <script src="{% static 'js/form_show.js' %}"></script>
 {% endblock content %}
