@@ -8,7 +8,7 @@ urlpatterns = [
     path('', include('artist.urls')),
     path('', include('genre.urls')),
     path('', include('music.urls')),
-    path('', include('user.urls')),
+    path('', include('users.urls')),
     path('admin/', admin.site.urls),
     path('auth/', include('django.contrib.auth.urls')),
 ]

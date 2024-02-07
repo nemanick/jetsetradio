@@ -1,7 +1,7 @@
 from django.db.models import Q 
 from music.models import Music
 
-def Search(reqeust):
+def search(reqeust):
     '''Search function view'''
     search_query = ''
 

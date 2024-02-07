@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from artist.models import Artist
-from core.models import Comment
+from users.models import Comment
 
 class Album(models.Model):
     '''Album model'''

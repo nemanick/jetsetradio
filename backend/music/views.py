@@ -3,19 +3,18 @@ from django.contrib import messages
 from music.models import Music, MusicComment
 from album.models import Album
 from music.forms import MusicCommentForm
-from music.utils import Search
-from core.tasks import send_email_task 
+from music.utils import search
 
-def SongsPage(request):
+def songsPage(request):
     '''Songs page view'''
-    songs = Search(request)
+    songs = search(request)
     new_song_for_player = Music.objects.filter(published=True).order_by('-created').first()
     context = {'songs' : songs, 'player' : new_song_for_player}
 
     return render(request, 'music/songs.html', context)
 
 
-def SingleSongPage(request, slug, pk):
+def singleSongPage(request, slug, pk):
     '''Single song page view'''
     song = Music.objects.get(slug=slug, pk=pk)
     form = MusicCommentForm()
@@ -46,11 +45,8 @@ def SingleSongPage(request, slug, pk):
                 comment.save()
 
             messages.success(request, 'Successfully Submitted. Your comment will be available after review.')
-            # Send email to user using celery
-            send_email_task.delay(comment.owner.email)
             return redirect('single-song', slug=song.slug, pk=song.id)
 
-    # Songs from this artist
     artist_albums = Album.objects.filter(artists=song.artists.first())[:6]
     music_comments_count = song.musiccomment_set.filter(active=True).count()
     context = {

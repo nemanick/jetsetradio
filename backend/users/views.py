@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from music.models import Music
-from user.forms import CustomUserCreationForm
+from users.forms import CustomUserCreationForm
 
 def registerUser(request):
     '''Register user view'''
