@@ -2,7 +2,9 @@ from django import template
 from textwrap import wrap
 from django.template.defaultfilters import stringfilter
 
+
 register = template.Library()
+
 
 @register.filter(name='charwrap')
 @stringfilter
