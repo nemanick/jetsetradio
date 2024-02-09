@@ -1,16 +1,18 @@
 from django.db.models import Q
-from artist.models import Artist
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
-def Search(reqeust):
+def search(reqeust):
     '''Search function view'''
     search_query = ''
 
     if reqeust.GET.get('query'):
         search_query = reqeust.GET.get('query')
 
-    artist = Artist.objects.distinct().filter(
-        Q(title__icontains=search_query)
+    artist = User.objects.distinct().filter(
+        Q(username__icontains=search_query)
     )
 
     return artist

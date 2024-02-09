@@ -1,4 +1,4 @@
-from core.forms import CommentForm
+from users.forms import CommentForm
 from album.models import AlbumComment
 
 class AlbumCommentForm(CommentForm):

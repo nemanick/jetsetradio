@@ -1,7 +1,7 @@
 from django.db.models import Q 
 from album.models import Album
 
-def Search(reqeust):
+def search(reqeust):
     '''Search function view'''
     search_query = ''
 

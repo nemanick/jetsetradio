@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from django.contrib.auth.models import (AbstractBaseUser,
     BaseUserManager, PermissionsMixin)
 
@@ -28,13 +29,28 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     '''Custom user model that support using email instead of username'''
     email = models.EmailField(max_length=255, unique=True)
-    name = models.CharField(max_length=255)
+    username = models.CharField(max_length=32, unique=True)
+    picture = models.ImageField(upload_to='ArtistsPictures/',
+                                default='ArtistsPictures/default.jpg')
+    slug = models.SlugField()
+    bio = models.TextField(max_length=1024)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
 
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
+
+    def __str__(self):
+        return self.username
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.username)
+        if not self.username:
+            self.username = 'user' + str(len(CustomUser.objects.all()))
+        super().save(*args, **kwargs)
 
 
 class Comment(models.Model):

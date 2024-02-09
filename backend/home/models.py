@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class HomePagePoster(models.Model):
     '''Home page model'''
     title = models.CharField(max_length=220)

@@ -514,6 +514,7 @@ $(document).ready(function () {
 				link = playlist.find('a[data-playlist]')[current];
 			}
 			run2($(link),audio[0]);
+			console.log('OK');
 		});
 
 		function run2(link, player){

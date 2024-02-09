@@ -3,5 +3,5 @@ from genre import views
 
 
 urlpatterns = [
-    path('<slug>-ID-<pk>/', views.GenrePage, name='genre')
+    path('<slug>-ID-<pk>/', views.genrePage, name='genre')
 ]

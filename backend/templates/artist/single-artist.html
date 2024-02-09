@@ -1,5 +1,5 @@
 {% extends 'main.html' %}
-{% block title %} <title>{{artist.title}} | NovaMusic</title>{% endblock title %}
+{% block title %} <title>{{artist.username}} | JetSetRadio</title>{% endblock title %}
 {% block content %}
 <!-- main content -->
 <main class="main">
@@ -12,18 +12,20 @@
                         <div class="article__artist">
                             <img src="{{artist.picture.url}}" alt="">
                             <div>
-                                <h1>{{artist.title}}</h1>
+                                <h1>{{artist.username}}</h1>
                             </div>
                         </div>
                         
-                        <p>{{artist.description}}</p>
-
+                        <p>{{artist.bio}}</p>
+                        {% if user.is_authenticated and user == artist %}
+                            <a href="{% url 'single-artist-edit' artist.slug artist.id %}" class="sidebar__nav-link">Edit Profile</a>
+                        {% endif %}
                     </div>
                     <!-- end article content -->
                 </div>
             </div>
         </div>
-
+        
         <!-- releases -->
         <section class="row row--grid">
             <!-- title -->

@@ -5,7 +5,7 @@
     </div>
 
     <div class="player__content">
-        <span class="player__track"><b class="player__title">{{player.title}}</b> – <span class="player__artist">{% for artist in player.artists.all %}{{artist.title}},{% endfor %}</span></span>
+        <span class="player__track"><b class="player__title">{{player.title}}</b> – <span class="player__artist">{% for artist in player.artists.all %}{{artist.username}},{% endfor %}</span></span>
         <audio src="{{player.song.url}}" id="audio" controls></audio>
     </div>
 </div>

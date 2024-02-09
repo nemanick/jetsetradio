@@ -202,7 +202,9 @@
 								<div class="artist__cover">
 									<img src="{{artist.picture.url}}" alt="">
 								</div>
-								<h3 class="artist__title">{{artist.title}}</h3>
+								<h3 class="artist__title" style="overflow: hidden; text-overflow: ellipsis;">
+									{{artist.username}}
+								</h3>
 							</a>
 							{% endfor %}
 

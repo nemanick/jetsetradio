@@ -1,4 +1,4 @@
-from django.contrib import admin
+"""from django.contrib import admin
 from artist.models import Artist
 
 
@@ -8,4 +8,4 @@ class ArtistAdmin(admin.ModelAdmin):
     search_fields = ['title']
 
 
-admin.site.register(Artist, ArtistAdmin)
+admin.site.register(Artist, ArtistAdmin)"""

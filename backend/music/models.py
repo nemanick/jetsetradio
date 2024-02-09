@@ -1,15 +1,17 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from users.models import Comment
-from artist.models import Artist
 from genre.models import Genre
 from album.models import Album
+
+User = get_user_model()
+
 
 class Music(models.Model):
     '''Music model'''
     title = models.CharField(max_length=220)
     thumbnail = models.ImageField(upload_to='SongsThumbnails/', default='SongsThumbnails/default.jpg')
-    artists = models.ManyToManyField(Artist)
+    artists = models.ManyToManyField(User)
     album = models.ForeignKey(Album, on_delete=models.SET_NULL, null=True, blank=True)
     genres = models.ManyToManyField(Genre)
     song = models.FileField(upload_to='Songs/', null=True, blank=True)
@@ -27,7 +29,10 @@ class Music(models.Model):
 
     def get_album_name(self):
         '''If the music object is connected to a album then get album name'''
-        return self.album.title
+        if self.album:
+            return self.album.title
+        else:
+            return "No Album"
 
     def __str__(self):
         return self.title

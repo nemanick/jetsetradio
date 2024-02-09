@@ -1,13 +1,15 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from artist.models import Artist
 from users.models import Comment
+
+User = get_user_model()
+
 
 class Album(models.Model):
     '''Album model'''
     title = models.CharField(max_length=220)
     description = models.TextField(null=True, blank=True)
-    artists = models.ManyToManyField(Artist)
+    artists = models.ManyToManyField(User)
     album_image = models.ImageField(upload_to='AlbumsImages/', default='AlbumsImages/default.jpg')
     album_download_link_high = models.CharField(max_length=350, null=True, blank=True)
     album_download_link_high_file = models.FileField(upload_to='AlbumsZipHigh/', null=True, blank=True)
@@ -24,7 +26,7 @@ class Album(models.Model):
 
 class AlbumComment(Comment):
     '''Album comment model inherit from main Comment model'''
-    owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
     
     def comment_title(self):

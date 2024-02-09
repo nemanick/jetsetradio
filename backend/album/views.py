@@ -3,16 +3,18 @@ from django.contrib import messages
 from album.models import Album, AlbumComment
 from genre.models import Genre
 from music.models import Music
-from album.utils import Search
+from album.utils import search
 from album.forms import AlbumCommentForm 
-from core.tasks import send_email_task
 
 def AlbumsPage(request):
     '''Releases albums view page'''
-    get_published_albums = Search(request)
-    new_song_for_player = Music.objects.filter(published=True).order_by('-created').first()
+    get_published_albums = search(request)
+    new_song_for_player = Music.objects.filter(
+        published=True).order_by('-created').first()
     get_genres = Genre.objects.all()
-    context = {'albums' : get_published_albums, 'genres' : get_genres, 'player' : new_song_for_player}
+    context = {'albums': get_published_albums,
+               'genres': get_genres,
+               'player': new_song_for_player}
     
     return render(request, 'album/albums.html', context)
 
@@ -51,8 +53,6 @@ def SingleAlbumPage(request, pk, slug):
                 comment.save()
 
             messages.success(request, 'Successfully Submitted. Your comment will be available after review.')
-            # Send email to user using celery
-            send_email_task.delay(comment.owner.email)
             return redirect('single-album', slug=get_album.slug, pk=get_album.id)
 
     new_song_for_player = Music.objects.filter(published=True).order_by('-created').first()
