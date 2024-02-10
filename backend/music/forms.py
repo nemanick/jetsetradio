@@ -14,11 +14,12 @@ class MusicCreateForm(ModelForm):
             instance.save()
         return instance
 
+
 class MusicCommentForm(CommentForm):
     class Meta:
         model = MusicComment
         fields = ['body']
 
         labels = {
-            'body' : 'Add a comment'
+            'body': 'Add a comment'
         }

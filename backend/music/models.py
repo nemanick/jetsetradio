@@ -10,9 +10,11 @@ User = get_user_model()
 class Music(models.Model):
     '''Music model'''
     title = models.CharField(max_length=220)
-    thumbnail = models.ImageField(upload_to='SongsThumbnails/', default='SongsThumbnails/default.jpg')
+    thumbnail = models.ImageField(upload_to='SongsThumbnails/',
+                                  default='SongsThumbnails/default.jpg')
     artists = models.ManyToManyField(User)
-    album = models.ForeignKey(Album, on_delete=models.SET_NULL, null=True, blank=True)
+    album = models.ForeignKey(Album, on_delete=models.SET_NULL, null=True,
+                              blank=True)
     genres = models.ManyToManyField(Genre)
     song = models.FileField(upload_to='Songs/', null=True, blank=True)
     song_duration = models.CharField(max_length=200, null=True, blank=True)
@@ -46,6 +48,8 @@ class MusicComment(Comment):
     class Meta:
         verbose_name = 'Comment'
         verbose_name_plural = 'Commnets'
-    
+
     def comment_title(self):
-        return f'Comment on {self.music} by {self.owner.name if self.owner.name else self.owner.email}'
+        return (f'Comment on {self.music} by '
+                f'{(self.owner.username if self.owner.username
+                    else self.owner.email)}')

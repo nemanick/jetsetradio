@@ -1,6 +1,7 @@
 from django.contrib import admin
 from music.models import Music, MusicComment
 
+
 class MusicAdmin(admin.ModelAdmin):
     '''Music admin page'''
     list_display = ['title', 'get_album_name', 'published', 'id']

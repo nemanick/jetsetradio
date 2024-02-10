@@ -43,25 +43,27 @@ def signleArtistPage(request, pk, slug):
 
 @login_required
 def singleArtistEdit(request, slug, pk):
-    user = User.objects.get(username=request.user.username)
-    form = CustomUserEditFrom(request.POST or None, files=request.FILES or None,
-                              instance=request.user)
+    user = request.user
+    form = CustomUserEditFrom(request.POST or None,
+                              files=request.FILES or None,
+                              instance=user)
 
-    if request.method == 'POST':
+    if request.POST:
         if form.is_valid():
             try:
-                form.instance.user = request.user
                 form.save()
+                messages.success(request, 'Changes saved successfully.')
                 return redirect('single-artist', slug=user.slug, pk=user.id)
-            except:
-                messages.error(request, 'An error has occurred during registration')
-
+            except Exception as e:
+                messages.error(request, ('An error occurred during'
+                                         f' registration: {e}'))
         else:
-            messages.error(request, 'An error has occurred during registration')
+            messages.error(request, ('Form is not valid. Please correct the '
+                                     'errors.'))
 
     context = {
         'form': form,
         'artist': user,
     }
-    
+
     return render(request, 'artist/single-artis-edit.html', context)

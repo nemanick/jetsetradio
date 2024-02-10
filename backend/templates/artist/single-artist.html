@@ -1,4 +1,29 @@
 {% extends 'main.html' %}
+{% block style %}
+    .plyr__control--next, .plyr__control--prev, a[aria-label="Playlist"] {
+        display: none;
+    }
+	#bio {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    #edit {
+        background-color: #25a56a;
+        padding: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        height: 50px;
+        width: auto;
+        border-radius: 12px;
+        color: #fff;
+        transition: 0.5s ease;
+        transition-property: background-color;
+    }
+    #edit:hover {
+        background-color: #222227;
+    }
+{% endblock style %}
 {% block title %} <title>{{artist.username}} | JetSetRadio</title>{% endblock title %}
 {% block content %}
 <!-- main content -->
@@ -16,9 +41,9 @@
                             </div>
                         </div>
                         
-                        <p>{{artist.bio}}</p>
+                        <p id="bio">{{artist.bio}}</p>
                         {% if user.is_authenticated and user == artist %}
-                            <a href="{% url 'single-artist-edit' artist.slug artist.id %}" class="sidebar__nav-link">Edit Profile</a>
+                            <a id="edit" href="{% url 'single-artist-edit' artist.slug artist.id %}" class="sidebar__nav-link">Edit Profile</a>
                         {% endif %}
                     </div>
                     <!-- end article content -->

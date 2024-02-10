@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import (AbstractBaseUser,
-    BaseUserManager, PermissionsMixin)
+                                        BaseUserManager, PermissionsMixin)
+
 
 class CustomUserManager(BaseUserManager):
     '''Custom user manager'''
@@ -9,7 +10,7 @@ class CustomUserManager(BaseUserManager):
         '''Creates and saves a user using email address'''
         if not email:
             raise ValueError('Users must have an email address')
-        
+
         user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -44,7 +45,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
-    
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.username)
@@ -57,4 +58,5 @@ class Comment(models.Model):
     body = models.TextField(max_length=320)
     created = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=False)
-    reply = models.ForeignKey('self', on_delete=models.CASCADE, related_name='replies', null=True, blank=True)
+    reply = models.ForeignKey('self', on_delete=models.CASCADE,
+                              related_name='replies', null=True, blank=True)

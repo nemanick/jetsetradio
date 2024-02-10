@@ -1,5 +1,6 @@
-from django.db.models import Q 
+from django.db.models import Q
 from music.models import Music
+
 
 def search(reqeust):
     '''Search function view'''
@@ -7,7 +8,7 @@ def search(reqeust):
 
     if reqeust.GET.get('query'):
         search_query = reqeust.GET.get('query')
-    
+
     only_published_music = Music.objects.filter(published=True)
 
     music = only_published_music.distinct().filter(

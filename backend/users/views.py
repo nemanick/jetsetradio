@@ -1,9 +1,5 @@
-import os
-from django.conf import settings
-from django.core.files import File
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout, get_user_model
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from music.models import Music
 from users.forms import CustomUserCreationForm
@@ -13,7 +9,8 @@ User = get_user_model()
 
 def registerUser(request):
     '''Register user view'''
-    new_song_for_player = Music.objects.filter(published=True).order_by('-created').first()
+    new_song_for_player = Music.objects.filter(
+        published=True).order_by('-created').first()
     form = CustomUserCreationForm()
 
     if request.method == 'POST':
@@ -27,15 +24,16 @@ def registerUser(request):
                 messages.success(request, 'User account was created!')
                 login(request, user)
                 return redirect('home')
-            except:
-                messages.error(request, 'An error has occurred during registration')
+            except Exception:
+                messages.error(request, 'An error has occurred during'
+                               ' registration')
 
         else:
-            messages.error(request, 'An error has occurred during registration')
-    
-    context = {'form' : form, 'player' : new_song_for_player}
+            messages.error(request, 'An error has occurred during '
+                           'registration')
+
+    context = {'form': form, 'player': new_song_for_player}
     return render(request, 'registration/signup.html', context)
-    
 
 
 def loginUser(request):
@@ -43,7 +41,8 @@ def loginUser(request):
     if request.user.is_authenticated:
         return redirect('home')
 
-    new_song_for_player = Music.objects.filter(published=True).order_by('-created').first()
+    new_song_for_player = Music.objects.filter(
+        published=True).order_by('-created').first()
 
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -53,7 +52,8 @@ def loginUser(request):
             user = User.objects.get(email=email)
         except User.DoesNotExist:
             messages.error(request, 'User does not exist !')
-            return render(request, 'registration/login.html', {'player': new_song_for_player})
+            return render(request, 'registration/login.html',
+                          {'player': new_song_for_player})
 
         user = authenticate(request, email=email, password=password)
 
@@ -62,7 +62,7 @@ def loginUser(request):
             return redirect(request.GET.get('next', 'home'))
         else:
             messages.error(request, 'User or password is incorrect !')
-    
+
     context = {'player': new_song_for_player}
     return render(request, 'registration/login.html', context)
 
