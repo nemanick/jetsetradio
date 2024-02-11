@@ -8,8 +8,8 @@ def genrePage(request, slug, pk):
     get_genre = Genre.objects.get(slug=slug, id=pk)
     new_song_for_player = Music.objects.filter(
         published=True).order_by('-created').first()
-    fitler_songs = Music.objects.filter(published=True, genres=get_genre)
-
+    fitler_songs = Music.objects.filter(published=True, genres__in=[get_genre])
+    print(fitler_songs)
     context = {'genre': get_genre, 'songs': fitler_songs,
                'player': new_song_for_player}
 

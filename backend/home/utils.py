@@ -1,8 +1,6 @@
 from django.db.models import Q
 from django.contrib.auth import get_user_model
 from music.models import Music
-#from artist.models import Artist
-from album.models import Album
 from genre.models import Genre
 
 User = get_user_model()
@@ -16,7 +14,6 @@ def search(reqeust):
         search_query = reqeust.GET.get('query')
 
     only_published_music = Music.objects.filter(published=True)
-    only_published_albums = Album.objects.filter(published=True)
 
     music = only_published_music.distinct().filter(
         Q(title__icontains=search_query) |
@@ -25,12 +22,8 @@ def search(reqeust):
     artist = User.objects.distinct().filter(
         Q(username__icontains=search_query)
     )
-    album = only_published_albums.distinct().filter(
-        Q(title__icontains=search_query)
-    )
-
     genre = Genre.objects.distinct().filter(
         Q(title__icontains=search_query)
     )
 
-    return music, artist, album, genre
+    return music, artist, genre

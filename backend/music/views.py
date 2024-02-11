@@ -3,9 +3,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import FileResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 from music.models import Music
-from album.models import Album
-from music.forms import MusicCommentForm
+from music.forms import MusicCommentForm, MusicCreateForm
 from music.utils import search
 
 
@@ -22,6 +22,8 @@ def songsPage(request):
 def singleSongPage(request, slug, pk):
     '''Single song page view'''
     song = Music.objects.get(slug=slug, pk=pk)
+    song.page_view += 1
+    song.save()
     form = MusicCommentForm()
 
     if request.method == 'POST':
@@ -53,12 +55,11 @@ def singleSongPage(request, slug, pk):
             messages.success(request, 'Successfully Submitted.')
             return redirect('single-song', slug=song.slug, pk=song.id)
 
-    artist_albums = Album.objects.filter(artists=song.artists.first())[:6]
     music_comments_count = song.musiccomment_set.filter(active=True).count()
+    print(song.artist.username)
     context = {
         'song': song,
         'player': song,
-        'artist_albums': artist_albums,
         'form': form,
         'comments_count': music_comments_count
     }
@@ -75,5 +76,43 @@ def downloadTrack(request, track_id):
         return HttpResponseNotFound('Track not found')
 
 
-def songCreate(request):
-    
+@login_required
+def songCreateAndEdit(request, slug=None, pk=None):
+    user = request.user
+    is_edit = False
+    instance_song = None
+
+    if pk is not None:
+        instance_song = get_object_or_404(Music, slug=slug, pk=pk)
+        is_edit = True
+        print(f'first {slug}')
+
+    form = MusicCreateForm(request.POST or None,
+                           files=request.FILES or None,
+                           instance=instance_song)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            try:
+                song = form.save(commit=False)
+                if not is_edit:
+                    song.slug = (song.title + str(user.id) +
+                                 str(Music.objects.all().count() + 1))
+                    song.published = True
+                    song.artist = user
+                song.save()
+                form.save_m2m()
+                return redirect('single-song', slug=song.slug, pk=song.pk)
+            except Exception as e:
+                messages.error(request, (f'An error '
+                                         f'occurred during registration: {e}'))
+        else:
+            messages.error(request, ('Form is not valid. '
+                                     'Please correct the errors.'))
+
+    context = {
+        'form': form,
+        'is_edit': is_edit,
+        'song': instance_song,
+    }
+    return render(request, 'music/song-create.html', context)

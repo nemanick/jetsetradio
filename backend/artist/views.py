@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CustomUserEditFrom
 
-from album.models import Album
 from genre.models import Genre
 from music.models import Music
 from artist.utils import search
@@ -28,14 +27,14 @@ def artistsPage(request):
 
 def signleArtistPage(request, pk, slug):
     get_artist = User.objects.get(id=pk, slug=slug)
-    print(get_artist.picture)
-    get_artist_albums = Album.objects.filter(artists=get_artist)
+    songs = Music.objects.filter(artist=get_artist,
+                                 published=True).order_by('-created')
     new_song_for_player = Music.objects.filter(
         published=True).order_by('-created').first()
     context = {
         'artist': get_artist,
-        'albums': get_artist_albums,
-        'player': new_song_for_player
+        'player': new_song_for_player,
+        'songs': songs,
     }
 
     return render(request, 'artist/single-artist.html', context)

@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     'music',
     'home',
     'genre',
-    'album'
 ]
 
 MIDDLEWARE = [
@@ -56,9 +55,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-        
-        'libraries' : {
-            'poll_extras': 'core.templates_utls.poll_extras',
+            'libraries': {
+                'poll_extras': 'core.templates_utls.poll_extras',
             },
         },
     },
@@ -79,16 +77,20 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': ('django.contrib.auth.password_'
+                 'validation.UserAttributeSimilarityValidator'),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': ('django.contrib.auth.password_'
+                 'validation.MinimumLengthValidator'),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': ('django.contrib.auth.password_'
+                 'validation.CommonPasswordValidator'),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': ('django.contrib.auth.password_'
+                 'validation.NumericPasswordValidator'),
     },
 ]
 
@@ -130,7 +132,8 @@ SIMPLE_JWT = {
     'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
     'USER_ID_FIELD': 'id',
     'USER_ID_CLAIM': 'user_id',
-    'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
+    'USER_AUTHENTICATION_RULE': ('rest_framework_simplejwt.authentication.'
+                                 'default_user_authentication_rule'),
 
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',

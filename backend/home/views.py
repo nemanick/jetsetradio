@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from genre.models import Genre
-from album.models import Album
 from music.models import Music
 from home.models import HomePagePoster as Poster
 from home.utils import search
@@ -10,7 +9,7 @@ User = get_user_model()
 
 ALL_MAX_COUNT = 12
 SONGS_MAX_COUNT = 5
-NEW_ALBUMS_MAX_COUNT = 6
+
 
 def homePage(request):
     '''Home page view'''
@@ -21,16 +20,13 @@ def homePage(request):
     get_songs = Music.objects.filter(
         published=True).order_by('-created')[:SONGS_MAX_COUNT]
     get_single_songs = Music.objects.filter(
-        published=True, single_track=True).order_by('-created')[:SONGS_MAX_COUNT]
+        published=True).order_by(
+            '-created')[:SONGS_MAX_COUNT]
     get_top_songs = Music.objects.filter(
-        published=True).order_by('page_view')[:SONGS_MAX_COUNT]
-    get_newest_albums = Album.objects.filter(
-        published=True).order_by('-created')[:NEW_ALBUMS_MAX_COUNT]
+        published=True).order_by('-page_view')[:SONGS_MAX_COUNT]
     get_artists = User.objects.all().order_by('-created')[:ALL_MAX_COUNT]
-    print(get_artists)
 
     context = {
-        'new_albums': get_newest_albums,
         'genres': get_genres,
         'artists': get_artists,
         'songs': get_songs,
@@ -44,11 +40,10 @@ def homePage(request):
 
 def searchPage(request):
     '''Search page view'''
-    music, artist, album, genre = search(request)
+    music, artist, genre = search(request)
     context = {
         'songs': music[:ALL_MAX_COUNT],
         'artists': artist[:ALL_MAX_COUNT],
-        'albums': album[:ALL_MAX_COUNT],
         'genres': genre[:ALL_MAX_COUNT],
         'query': request.GET.get('query')
     }
