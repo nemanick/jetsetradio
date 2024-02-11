@@ -65,7 +65,7 @@ def singleSongPage(request, slug, pk):
     return render(request, 'music/single-song.html', context)
 
 
-def download_track(request, track_id):
+def downloadTrack(request, track_id):
     track = get_object_or_404(Music, id=track_id)
     track_path = track.song.path
 
@@ -73,3 +73,7 @@ def download_track(request, track_id):
         return FileResponse(open(track_path, 'rb'), as_attachment=True)
     else:
         return HttpResponseNotFound('Track not found')
+
+
+def songCreate(request):
+    

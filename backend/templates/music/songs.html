@@ -45,7 +45,13 @@
                                 <h3><a href="{% url 'single-song' song.slug song.id %}">{{song.title}}</a></h3>
                                 <span>
                                     {% for artist in song.artists.all %}
-                                        <a href="{% url 'single-artist' artist.slug artist.id %}">{{artist.title}}</a>,
+                                        <a href="{% url 'single-artist' artist.slug artist.id %}">{{artist.title}}</a>
+                                        {% if song.artists.all|length > 1 %}
+                                        {% if forloop.last %}
+                                        {% else %}
+                                            ,
+                                        {% endif %}
+                                        {% endif %}
                                     {% endfor %}
                                 </span>
                             </div>
