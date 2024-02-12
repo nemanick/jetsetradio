@@ -7,5 +7,6 @@ urlpatterns = [
     path('download/<int:track_id>/', views.downloadTrack,
          name='download-track'),
     path('create/', views.songCreateAndEdit, name='song-create'),
-    path('edit/<slug>-ID-<pk>/', views.songCreateAndEdit, name='song-edit')
+    path('edit/<slug>-ID-<pk>/', views.songCreateAndEdit, name='song-edit'),
+    path('delete/<slug>-ID-<pk>/', views.songDelete, name='song-delete')
 ]

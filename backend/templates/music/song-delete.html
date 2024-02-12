@@ -1,0 +1,103 @@
+{% extends 'main.html' %}
+{% block style %}
+	.plyr__control--next, .plyr__control--prev, a[aria-label="Playlist"] {
+		display: none;
+	}
+    .sign__content {
+        color: #fff;
+    }
+    #id_picture {
+        width: 100%;
+    }
+    #current {
+        display: block;
+        width: 100%;
+    }
+    #now_picture {
+        height: auto;
+        width: 200px !important;
+        margin-right: 20px;
+        border-radius: 12px;
+    }
+    option {
+        color: #25a56a;
+        display: block;
+        padding: 10px;
+        margin: 5px 0;
+        width: auto;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        border: 2px solid #25a56a;
+        transition: 0.5s ease;
+        transition-property: color, background-color;
+        text-align: center;
+    }
+    option:hover {
+        background-color: #25a56a;
+        color: #fff;
+    }
+    option:checked {
+        color: #fff;
+        background-color: #25a56a;
+    }
+    #id_genres {
+        padding: 0;
+        width: 100%;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 2px 10px;
+        width: 100%;
+        height: 9.6em;
+    }
+    #id_thumbnail, #id_song {
+        padding-top: 6px;
+        width: 100%;
+    }
+    #delete-modal {
+        border: 2px solid #25a56a;
+        color: #fff;
+    }
+    .modal-content button, #cancel, #cancel:visited {
+        color: #25a56a;
+    }
+    .modal-content button:hover, #cancel {
+        color: #fff;
+    }
+    #confirm-delete {
+        margin-right: 50px;
+    }
+    #cancel:visited:hover {
+        color: #fff;
+    }
+
+{% endblock style %}
+{% block title %} <title>Delete Song | JetSetRadio</title>{% endblock title %}
+{% block content %}
+<!-- main content -->
+<main class="main">
+    <div class="container-fluid">
+        <div class="row row--grid">
+            <div class="col-12">
+            <form id="delete-form" action="{% url "song-delete" song.slug song.id %}" method="post">
+                {% csrf_token %}
+                <div id="delete-modal" class="modal">
+                    <div class="modal-content">
+                        <p>Вы уверены, что хотите удалить эту запись?</p>
+                        <button type="submit" id="confirm-delete">Да</button>
+                        <button type="button" id="cancel-delete">
+                            <a id="cancel" href="{% url "single-song" song.slug song.id %}">
+                                Отмена
+                            <a/>
+                        </button>
+                    </div>
+                </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+</main>
+<!-- end main content -->
+{% endblock content %}

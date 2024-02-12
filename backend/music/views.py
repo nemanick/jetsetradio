@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from music.models import Music
 from music.forms import MusicCommentForm, MusicCreateForm
 from music.utils import search
+from users.models import CustomUser
 
 
 def songsPage(request):
@@ -116,3 +117,13 @@ def songCreateAndEdit(request, slug=None, pk=None):
         'song': instance_song,
     }
     return render(request, 'music/song-create.html', context)
+
+
+def songDelete(request, slug, pk):
+    if request.method == 'POST':
+        user = CustomUser.objects.get(username=request.user.username)
+        Music.objects.get(slug=slug, id=pk).delete()
+        return redirect('single-artist', slug=user.slug, pk=user.id)
+
+    song = Music.objects.get(slug=slug, pk=pk)
+    return render(request, 'music/song-delete.html', {'song': song})

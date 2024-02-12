@@ -88,6 +88,7 @@
                     {% endif %}
                     {% if user.is_authenticated and user == song.artist %}
                         <a id="edit" href="{% url "song-edit" song.slug song.id %}" class="sidebar__nav-link">Edit Song</a>
+                        <a id="edit" href="{% url "song-delete" song.slug song.id %}" class="sidebar__nav-link">Delete Song</a>
                     {% endif %}
                     </div>
                 </div>

@@ -56,6 +56,22 @@
         padding-top: 6px;
         width: 100%;
     }
+    #delete-modal {
+        display: none;
+        position: fixed;
+        top: 350px;
+        border: 2px solid #25a56a;
+        z-index: 2;
+    }
+    .modal-content button {
+        color: #25a56a;
+    }
+    .modal-content button:hover {
+        color: #fff;
+    }
+    #confirm-delete {
+        margin-right: 50px;
+    }
 
 {% endblock style %}
 {% block title %} <title>Create Song | JetSetRadio</title>{% endblock title %}
@@ -98,6 +114,18 @@
                             {% endif %}
                             {% endfor %}
                             <button class="sign__btn" type="submit">Edit Song</button>
+                            <!-- Модальное окно для подтверждения удаления 
+                            <div id="delete-modal" class="modal">
+                                <div class="modal-content">
+                                    <p>Вы уверены, что хотите удалить эту запись?</p>
+                                    <button type="button" id="confirm-delete">Да</button>
+                                    <button type="button" id="cancel-delete">Отмена</button>
+                                </div>
+                            </div>-->
+                            <form id="delete-form" action="{% url "delete-song" song.slug song.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="button" id="delete-btn" class="sign__btn">Удалить запись</button>
+                            </form> 
                         </form>
                     </div>
                 </div>
