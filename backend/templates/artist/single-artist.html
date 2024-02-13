@@ -1,0 +1,101 @@
+{% extends 'main.html' %}
+{% block style %}
+    .plyr__control--next, .plyr__control--prev, a[aria-label="Playlist"] {
+        display: none;
+    }
+	#bio {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    #edit {
+        background-color: #25a56a;
+        padding: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        height: 50px;
+        width: auto;
+        border-radius: 12px;
+        color: #fff;
+        transition: 0.5s ease;
+        transition-property: background-color;
+    }
+    #edit:hover {
+        background-color: #222227;
+    }
+{% endblock style %}
+{% block title %} <title>{{artist.username}} | JetSetRadio</title>{% endblock title %}
+{% block content %}
+<!-- main content -->
+<main class="main">
+    <div class="container-fluid">
+        <div class="row row--grid">
+            <div class="col-12">
+                <div class="article article--page">
+                    <!-- article content -->
+                    <div class="article__content">
+                        <div class="article__artist">
+                            <img src="{{artist.picture.url}}" alt="">
+                            <div>
+                                <h1>{{artist.username}}</h1>
+                            </div>
+                        </div>
+                        
+                        {% if artist.bio %}
+                        <p id="bio">{{artist.bio}}</p>
+                        {% else %}
+                        <p id="bio">we don't know anything about this user, but we are sure that he is a good person</p>
+                        {% endif %}
+                        {% if user.is_authenticated and user == artist %}
+                            <a id="edit" href="{% url 'single-artist-edit' artist.slug artist.id %}" class="sidebar__nav-link">Edit Profile</a>
+                        {% endif %}
+                    </div>
+                    <!-- end article content -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- releases -->
+        <section class="row row--grid">
+            <!-- title -->
+            <div class="col-12">
+                <div class="main__title">
+                    <h2>Songs</h2>
+                </div>
+            </div>
+            <!-- end title -->
+            {% if songs %}
+            {% for song in songs %}
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <div class="album">
+                            <div class="album__cover">
+                                <img src="{{song.thumbnail.url}}" alt="">
+                                <a data-link data-title="{{song.title}}" data-artist="{{song.artist.username}}" data-img="{{song.thumbnail.url}}" href="{{song.song.url}}" class="single-item__cover">
+                                    <img src="{{song.thumbnail.url}}" alt="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.54,9,8.88,3.46a3.42,3.42,0,0,0-5.13,3V17.58A3.42,3.42,0,0,0,7.17,21a3.43,3.43,0,0,0,1.71-.46L18.54,15a3.42,3.42,0,0,0,0-5.92Zm-1,4.19L7.88,18.81a1.44,1.44,0,0,1-1.42,0,1.42,1.42,0,0,1-.71-1.23V6.42a1.42,1.42,0,0,1,.71-1.23A1.51,1.51,0,0,1,7.17,5a1.54,1.54,0,0,1,.71.19l9.66,5.58a1.42,1.42,0,0,1,0,2.46Z"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16,2a3,3,0,0,0-3,3V19a3,3,0,0,0,6,0V5A3,3,0,0,0,16,2Zm1,17a1,1,0,0,1-2,0V5a1,1,0,0,1,2,0ZM8,2A3,3,0,0,0,5,5V19a3,3,0,0,0,6,0V5A3,3,0,0,0,8,2ZM9,19a1,1,0,0,1-2,0V5A1,1,0,0,1,9,5Z"/></svg>
+                                </a>
+                            </div>
+                            <div class="album__title">
+                                <h3><a href="{% url 'single-song' song.slug song.id %}">{{song.title}}</a></h3>
+                                <span>
+                                    <a href="{% url 'single-artist' song.artist.slug song.artist.id %}">{{song.artist.username}}</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% else %}
+                <div class="article__content">
+                    <p id="bio">
+                        This user likes to listen, not create.
+                    </p>
+                </div>
+                {% endif %}
+        </section>
+        <!-- end releases -->
+
+    </div>
+</main>
+<!-- end main content -->
+{% endblock content %}
