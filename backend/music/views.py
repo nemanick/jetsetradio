@@ -30,23 +30,6 @@ def singleSongPage(request, slug, pk):
     if request.method == 'POST':
         form = MusicCommentForm(request.POST)
         if form.is_valid():
-            """
-            reply_obj = None
-            try:
-                reply_id = int(request.POST.get('reply_id'))
-            except:
-                reply_id = None
-
-            if reply_id:
-                reply_obj = MusicComment.objects.get(id=reply_id)
-
-            if reply_obj:
-                comment = form.save(commit=False)
-                comment.music = song
-                comment.owner = request.user
-                comment.reply = reply_obj
-                comment.save()"""
-
             comment = form.save(commit=False)
             comment.music = song
             comment.owner = request.user
@@ -122,7 +105,8 @@ def songCreateAndEdit(request, slug=None, pk=None):
 def songDelete(request, slug, pk):
     if request.method == 'POST':
         user = CustomUser.objects.get(username=request.user.username)
-        Music.objects.get(slug=slug, id=pk).delete()
+        song = Music.objects.get(slug=slug, id=pk)
+        song.delete()
         return redirect('single-artist', slug=user.slug, pk=user.id)
 
     song = Music.objects.get(slug=slug, pk=pk)
