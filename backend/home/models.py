@@ -1,6 +1,6 @@
 from django.db import models
 
-
+"""
 class HomePagePoster(models.Model):
     '''Home page model'''
     title = models.CharField(max_length=220)
@@ -9,4 +9,4 @@ class HomePagePoster(models.Model):
     albums_url = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        return self.title"""

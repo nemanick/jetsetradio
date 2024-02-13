@@ -146,8 +146,8 @@ SIMPLE_JWT = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST_PASSWORD = 'jyjxuwehfafeakge'
-EMAIL_HOST_USER = 'dmitryharchock@yandex.ru'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = ''
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True

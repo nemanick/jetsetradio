@@ -58,5 +58,3 @@ class Comment(models.Model):
     body = models.TextField(max_length=320)
     created = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=False)
-    reply = models.ForeignKey('self', on_delete=models.CASCADE,
-                              related_name='replies', null=True, blank=True)

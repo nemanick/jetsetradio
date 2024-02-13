@@ -10,7 +10,7 @@ class MusicCreateForm(ModelForm):
         widgets = {
             'genres': SelectMultiple(attrs={'class': 'cart__amount'}),
             'thumbnail': FileInput(attrs={'type': 'file',
-                                          'name': 'thumbnail',
+                                          'name': 'thum bnail',
                                           'accept': 'image/*',
                                           'class': 'form-control',
                                           'id': 'id_thumbnail', }),
