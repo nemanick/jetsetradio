@@ -122,10 +122,6 @@
                                     <button type="button" id="cancel-delete">Отмена</button>
                                 </div>
                             </div>-->
-                            <form id="delete-form" action="{% url "delete-song" song.slug song.id %}" method="post">
-                                {% csrf_token %}
-                                <button type="button" id="delete-btn" class="sign__btn">Удалить запись</button>
-                            </form> 
                         </form>
                     </div>
                 </div>
